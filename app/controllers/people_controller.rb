@@ -15,6 +15,11 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:name, :fun_facts)
   end
+
+  def show
+  @person = Person.find(params[:id])
+end
+
 end
 
 
