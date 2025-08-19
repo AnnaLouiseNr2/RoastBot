@@ -3,20 +3,19 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @people = current_user.people
+
+    @people = current_user.people.order(created_at: :desc)
+    @person = Person.new
   end
 
-
-  def new
-    @person = current_user.people.new
-  end
 
   def create
     @person = current_user.people.new(person_params)
     if @person.save
-      redirect_to people_path
+      redirect_to person_path(@person)
     else
-      render :new, status: :unprocessable_entity
+      @people = current_user.people.order(created_at: :desc)
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -25,22 +24,13 @@ class PeopleController < ApplicationController
   end
 
   def show
-  @person = Person.find(params[:id])
-  @chats  = @person.chats.where(user: current_user).order(created_at: :desc) if @person.respond_to?(:chats)
+
+  @person = current_user.people.find_by(id: params[:id])
+  if @person.nil?
+    redirect_to people_path, alert: "Not authorized to view this page"
+  else
+    @chats = @person.chats.where(user: current_user).order(created_at: :desc)
+  end
   end
 
 end
-
-
-
-
-# paste this into perople index
-
-
-# #  <h1>New Person</h1>
-
-# <%= simple_form_for @person do |f| %>
-#   <%= f.input :name %>
-#   <%= f.input :fun_facts, as: :text %>
-#   <%= f.button :submit, "Create Person" %>
-#  <% end %>

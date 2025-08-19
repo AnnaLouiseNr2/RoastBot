@@ -2,23 +2,22 @@
   <div class="hero-text p-4 rounded-3 shadow-lg">
     <h1 class="display-3 fw-bold">Serving Roasts Hotter Than Their PR Spin</h1>
     <p class="lead mt-3">Ready for some sharp wit? Check out the dedicated pages of public figures by clicking on their cards below. 👇</p>
-    <a href="#roast-grid" class="btn btn-warning btn-lg fw-bold mt-4">Check Out the Roasts</a>
+    <%= simple_form_for @person do |f| %>
+  <%= f.input :name %>
+  <%= f.input :fun_facts, as: :text %>
+  <%= f.button :submit, "Create Person", style: "color: white; background-color: green;" %>
+ <% end %>
   </div>
 </div>
 
 <div class="container my-5" id="roast-grid">
   <h2 class="text-center mb-5 display-5 fw-bold text-dark">Who's on the menu?</h2>
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <% famous_figures = [
-      { name: "Elon Musk", image: "elon_musk.jpg", path: "#" },
-      { name: "Jeff Bezos", image: "jeff_bezos.JPG", path: "#" },
-      { name: "J.K. Rowling", image: "jk_rowling.jpg", path: "#" },
-      { name: "Mark Zuckerberg", image: "mark_zuckerberg.JPG", path: "#" },
-      { name: "Taylor Swift", image: "taylor_swift.jpg", path: "#" },
-      { name: "Warren Buffett", image: "warren_buffett.JPG", path: "#" }
-    ] %>
 
-    <% famous_figures.each do |figure| %>
+
+    <% all_figures = @people.map { |p| { name: p.name, image: p.image, path: person_path(p) } } %>
+
+    <% all_figures.each do |figure| %>
       <div class="col">
         <div class="card h-100 border-0">
           <%= image_tag figure[:image], class: "card-img-top", alt: figure[:name] %>
@@ -32,6 +31,10 @@
   </div>
 </div>
 
+
+
+
+
 <style>
   .hero-image {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<%= asset_path("hero_image.jpg") %>');
@@ -42,6 +45,8 @@
     align-items: center;
     justify-content: center;
   }
+
+  .
 
   .hero-text {
     background-color: rgba(0, 0, 0, 0.6);
