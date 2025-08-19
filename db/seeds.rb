@@ -8,21 +8,31 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Chat.destroy_all if defined?(Chat)
 Person.destroy_all
+User.destroy_all
 
+# Create a demo user
+user = User.create!(
+  email: "demo@example.com",
+  password: "password123",
+  password_confirmation: "password123"
+)
+
+# Create people associated with that user
 people = [
-  { name: "Lara Venton",     fun_facts: "Owns 27 mismatched socks." },
-  { name: "Miles Ronder",    fun_facts: "Talks to houseplants daily." },
-  { name: "Sienna Karpov",   fun_facts: "Believes cereal is a soup." },
-  { name: "Jonas Fletch",    fun_facts: "Never learned to whistle." },
-  { name: "Amira Solven",    fun_facts: "Has a pet snail named Turbo." },
-  { name: "Caius Trell",     fun_facts: "Can recite the alphabet backwards." },
-  { name: "Nyla Bracks",     fun_facts: "Thinks pineapple pizza is elite cuisine." },
-  { name: "Eren Malvik",     fun_facts: "Collects novelty keychains." },
-  { name: "Tova Mirelle",    fun_facts: "Laughs at their own jokes first." },
-  { name: "Kieran Doss",     fun_facts: "Claims to remember every dream vividly." }
+  { name: "Lara Venton",   fun_facts: "Owns 27 mismatched socks." },
+  { name: "Miles Ronder",  fun_facts: "Talks to houseplants daily." },
+  { name: "Sienna Karpov", fun_facts: "Believes cereal is a soup." },
+  { name: "Jonas Fletch",  fun_facts: "Never learned to whistle." },
+  { name: "Amira Solven",  fun_facts: "Has a pet snail named Turbo." },
+  { name: "Caius Trell",   fun_facts: "Can recite the alphabet backwards." },
+  { name: "Nyla Bracks",   fun_facts: "Thinks pineapple pizza is elite cuisine." },
+  { name: "Eren Malvik",   fun_facts: "Collects novelty keychains." },
+  { name: "Tova Mirelle",  fun_facts: "Laughs at their own jokes first." },
+  { name: "Kieran Doss",   fun_facts: "Claims to remember every dream vividly." }
 ]
 
-Person.insert_all(people)
-
-
+people.each do |attrs|
+  user.people.create!(attrs)
+end

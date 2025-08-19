@@ -22,6 +22,7 @@ class PeopleController < ApplicationController
 
   def show
   @person = Person.find(params[:id])
+  @chats  = @person.chats.order(created_at: :desc) if @person.respond_to?(:chats)
 end
 
 end

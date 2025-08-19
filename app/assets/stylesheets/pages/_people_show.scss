@@ -1,0 +1,27 @@
+.people-show {
+  background:
+    radial-gradient(1200px 600px at -10% -10%, rgba(99, 102, 241, 0.06), transparent 60%),
+    radial-gradient(1000px 500px at 110% -20%, rgba(236, 72, 153, 0.06), transparent 60%);
+
+  .avatar.avatar-xl {
+    width: 64px;
+    height: 64px;
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  }
+
+  .fun-fact-box {
+    background: #f8fafc;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .chat-list .chat-item {
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform .06s ease, box-shadow .12s ease;
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+  }
+}
