@@ -1,0 +1,71 @@
+.
+├── app
+│   ├── assets
+│   ├── channels
+│   ├── controllers
+│   ├── helpers
+│   ├── javascript
+│   ├── jobs
+│   ├── mailers
+│   ├── models
+│   └── views
+├── bin
+│   ├── bundle
+│   ├── docker-entrypoint
+│   ├── importmap
+│   ├── rails
+│   ├── rake
+│   └── setup
+├── config
+│   ├── application.rb
+│   ├── boot.rb
+│   ├── cable.yml
+│   ├── credentials.yml.enc
+│   ├── database.yml
+│   ├── environment.rb
+│   ├── environments
+│   ├── importmap.rb
+│   ├── initializers
+│   ├── locales
+│   ├── puma.rb
+│   ├── routes.rb
+│   └── storage.yml
+├── config.ru
+├── db
+│   ├── migrate
+│   ├── schema.rb
+│   └── seeds.rb
+├── Dockerfile
+├── Gemfile
+├── Gemfile.lock
+├── lib
+│   ├── assets
+│   ├── tasks
+│   └── templates
+├── project_tree.txt
+├── project.txt
+├── public
+│   ├── 404.html
+│   ├── 422.html
+│   ├── 500.html
+│   ├── apple-touch-icon.png
+│   ├── apple-touch-icon-precomposed.png
+│   ├── favicon.ico
+│   └── robots.txt
+├── Rakefile
+├── README.md
+├── storage
+├── test
+│   ├── application_system_test_case.rb
+│   ├── channels
+│   ├── controllers
+│   ├── fixtures
+│   ├── helpers
+│   ├── integration
+│   ├── mailers
+│   ├── models
+│   ├── system
+│   └── test_helper.rb
+└── tree.txt
+
+33 directories, 36 files

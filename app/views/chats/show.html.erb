@@ -1,1 +1,27 @@
-foos
+<div class="container">
+  <div class="header">
+    <h1>Chat History with <%= @people.name %></h1>
+    <div class="actions">
+      <%= link_to "Back to People", people_path %>
+      <%= link_to "Home", root_path %>
+    </div>
+  </div>
+
+  <div class="content">
+    <% if @people.chats.any? %>
+      <ul>
+        <% @people.chats.each do |chat| %>
+          <li>
+            <%= link_to chat.name, people_chat_path(@people, chat) %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No chats found for this person. Start a new one!</p>
+    <% end %>
+  </div>
+
+  <div class="footer">
+    <%= link_to "Start a New Chat", new_people_chat_path(@people) %>
+  </div>
+</div>
