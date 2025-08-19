@@ -19,6 +19,12 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:name, :fun_facts)
   end
+
+  def show
+  @person = Person.find(params[:id])
+  @chats  = @person.chats.order(created_at: :desc) if @person.respond_to?(:chats)
+end
+
 end
 
 
