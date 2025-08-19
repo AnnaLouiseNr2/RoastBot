@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header">
-    <h1>Chat History with <%= @people.name %></h1>
+    <h1>Chat History with <%= @person.name %></h1>
     <div class="actions">
       <%= link_to "Back to People", people_path %>
       <%= link_to "Home", root_path %>
@@ -8,11 +8,11 @@
   </div>
 
   <div class="content">
-    <% if @people.chats.any? %>
+    <% if @person.chats.any? %>
       <ul>
-        <% @people.chats.each do |chat| %>
+        <% @person.chats.each do |chat| %>
           <li>
-            <%= link_to chat.name, people_chat_path(@people, chat) %>
+            <%= link_to chat.name, person_chat_path(@person, chat) %>
           </li>
         <% end %>
       </ul>
@@ -22,6 +22,6 @@
   </div>
 
   <div class="footer">
-    <%= link_to "Start a New Chat", new_people_chat_path(@people) %>
+    <%= link_to "Start a New Chat", new_person_chat_path(@person, @chat) %>
   </div>
 </div>

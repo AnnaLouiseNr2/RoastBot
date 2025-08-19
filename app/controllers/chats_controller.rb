@@ -3,6 +3,8 @@ class ChatsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_person
 
+  def show
+  end
 
   def new
     @chat = @person.chats.new
@@ -46,10 +48,3 @@ end
 
 
 # this is the form for new chat
-
-#  <h1>New Chat</h1>
-
-# <%= simple_form_for @chat do |f| %>
-#   <%= f.input :name %>
-#   <%= f.button :submit, "Create Chat" %>
-#  <% end %>
