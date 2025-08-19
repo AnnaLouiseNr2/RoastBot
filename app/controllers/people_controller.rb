@@ -1,12 +1,16 @@
 class PeopleController < ApplicationController
+
+  before_action :authenticate_user!
+
+
   def new
-    # @people = current_user.People.new
+    @person = current_user.people.new
   end
 
   def create
-    # @people = current_user.people.new(person_params)
-    if save
-      redirect_to something_path
+    @person = current_user.people.new(person_params)
+    if @person.save
+      redirect_to people_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,10 +28,14 @@ end
 
 
 
-# <h1>New Person</h1>
+
+# paste this into perople index
+
+
+# #  <h1>New Person</h1>
 
 # <%= simple_form_for @person do |f| %>
 #   <%= f.input :name %>
 #   <%= f.input :fun_facts, as: :text %>
 #   <%= f.button :submit, "Create Person" %>
-# <% end %>
+#  <% end %>
