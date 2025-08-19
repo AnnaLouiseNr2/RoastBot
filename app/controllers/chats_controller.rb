@@ -22,7 +22,7 @@ class ChatsController < ApplicationController
   end
 
   def destroy
-    @chat = @person.chats.find(params[:id])
+    @chat = Chat.find(params[:id])
     @chat.destroy
     redirect_to person_path(@person)
   end

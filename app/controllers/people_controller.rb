@@ -2,6 +2,10 @@ class PeopleController < ApplicationController
 
   before_action :authenticate_user!
 
+  def index
+    @people = current_user.people
+  end
+
 
   def new
     @person = current_user.people.new
@@ -22,8 +26,8 @@ class PeopleController < ApplicationController
 
   def show
   @person = Person.find(params[:id])
-  @chats  = @person.chats.order(created_at: :desc) if @person.respond_to?(:chats)
-end
+  @chats  = @person.chats.where(user: current_user).order(created_at: :desc) if @person.respond_to?(:chats)
+  end
 
 end
 
