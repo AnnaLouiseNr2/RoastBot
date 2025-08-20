@@ -12,7 +12,7 @@
         <% @chat.messages.each do |message| %>
           <div class="message <%= 'user-message' if message.role == "user" %> <%= 'bot-message' if message.role == "bot" %>">
             <div class="message-header">
-              <span><%= message.created_at.strftime("%b %d, %Y %H:%M") %></span>
+              <span><%= message.created_at %></span>
             </div>
             <div class="message-body">
               <%= message.content %>
@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="message-form">
-    <%= form_with(model: [@person, @chat, Message.new], local: true) do |f| %>
+    <%= form_with(model: [@person, @chat, @message], local: true) do |f| %>
       <div class="form-row">
         <%= f.text_field :content, placeholder: "Type a message..." %>
         <%= f.submit "Send", class: "btn-send" %>
