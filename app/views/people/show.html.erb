@@ -66,8 +66,6 @@
     </div>
 
     <div class="card-footer bg-white d-flex gap-2">
-      <%= link_to "Start New Chat", new_person_chat_path(@person), class: "btn btn-primary" rescue nil %>
-      <%= link_to "Back to People", people_path, class: "btn btn-outline-secondary" %>
 
 <%= button_to "Delete Person", person_path(@person),
           method: :delete,
