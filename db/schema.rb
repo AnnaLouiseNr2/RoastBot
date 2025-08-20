@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_20_095739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.text "image"
+    t.string "image", default: "https://www.ledr.com/colours/white.jpg"
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
