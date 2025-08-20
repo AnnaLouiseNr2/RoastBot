@@ -5,6 +5,7 @@
     <%= simple_form_for @person do |f| %>
   <%= f.input :name %>
   <%= f.input :fun_facts, as: :text %>
+  <%= f.input :image, as: :text, label: "Image URL(Optional)", input_html: { placeholder: "Give an image url (Optional)", style: "height: 30px;" }%>
   <%= f.button :submit, "Create Person", style: "color: white; background-color: green;" %>
  <% end %>
   </div>

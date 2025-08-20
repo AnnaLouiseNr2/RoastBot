@@ -1,9 +1,10 @@
 class ChatsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_person
+  before_action :set_person, except: [:destroy]
 
   def show
+    @chat = Chat.find(params[:id])
   end
 
   def new
@@ -24,14 +25,14 @@ class ChatsController < ApplicationController
   def destroy
     @chat = Chat.find(params[:id])
     @chat.destroy
-    redirect_to person_path(@person)
+    redirect_to person_path(@chat.person), status: :see_other
   end
 
 
   private
 
   def chat_params
-    params.require(:chat).permit(:name)
+    params.require(:chat).permit(:name, :tone, :format)
   end
 
   def set_person
@@ -41,9 +42,6 @@ end
 
 # button for delete
 
-# <%= button_to "Delete", person_chat_path(@person, @chat),
-#           method: :delete,
-#           data: { confirm: "Are you sure you want to delete this chat?" } %>
 
 
 

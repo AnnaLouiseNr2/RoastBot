@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :people,  dependent: :destroy
   has_many :chats,   dependent: :destroy
-  has_many :messages, through: :chats
+  # has_many :messages, through: :chats
 
 DEFAULT_PEOPLE = [
   { name: "Elon Musk", fun_facts: "CEO mode." },

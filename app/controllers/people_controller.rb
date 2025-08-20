@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:name, :fun_facts)
+    params.require(:person).permit(:name, :fun_facts, :image)
   end
 
   def show
@@ -31,6 +31,13 @@ class PeopleController < ApplicationController
   else
     @chats = @person.chats.where(user: current_user).order(created_at: :desc)
   end
+  end
+
+
+  def destroy
+    @person = Person.find(params[:id])
+    @person.destroy
+    redirect_to people_path, status: :see_other
   end
 
 end
