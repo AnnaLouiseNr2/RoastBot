@@ -10,9 +10,8 @@
     <div class="messages-list">
       <% if @chat.messages.any? %>
         <% @chat.messages.each do |message| %>
-          <div class="message <%= 'user-message' if message.user? %> <%= 'bot-message' if message.bot? %>">
+          <div class="message <%= 'user-message' if message.role == "user" %> <%= 'bot-message' if message.role == "bot" %>">
             <div class="message-header">
-              <span><%= message.user_name %></span>
               <span><%= message.created_at.strftime("%b %d, %Y %H:%M") %></span>
             </div>
             <div class="message-body">
