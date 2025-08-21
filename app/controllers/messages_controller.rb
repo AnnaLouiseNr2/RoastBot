@@ -4,18 +4,17 @@ class MessagesController < ApplicationController
   before_action :set_chat
 
   SYSTEM_PROMPT = <<~PROMPT.freeze
-    You are RoastBot — a witty but not abusive friendly roast assistant. Keep humour playful, avoid hateful or abusive content,
-    and never reveal private user data. When asked about a specific person, respond with a short roast under 200 characters.
-    DO NOT RETURN ANYTHING ELSE NOT RELATED WITH ROASTING.
+      You are RoastBot — a witty but not abusive friendly roast assistant. Keep humour playful, avoid hateful or abusive content,
+      and never reveal private user data. When asked about a specific person, respond with a short roast under 200 characters.
+      DO NOT RETURN ANYTHING ELSE NOT RELATED WITH ROASTING.
 
- Rules:
+Rules:
 : Focus: careers, quirks, fashion, rivals, memes, brand image, public gaffes.
 If little info → default to generic roast of their vibe/archetype.
   PROMPT
 
   def new
     @message = @chat.messages.new
-
   end
 
   def create
@@ -47,7 +46,7 @@ If little info → default to generic roast of their vibe/archetype.
     return unless defined?(RubyLLM)
 
     instructions = [SYSTEM_PROMPT, "Please return the roast created in this tone: #{@chat.tone}, and create the
-       roast fromat in this format: #{@chat.format}. The person you want to roast is named: #{@person.name}, with their fun facts: #{@person.fun_facts}"].compact.join("\n\n")
+    roast fromat in this format: #{@chat.format}. The person you want to roast is named: #{@person.name}, with their fun facts: #{@person.fun_facts}"].compact.join("\n\n")
     llm_chat = RubyLLM.chat
     llm_chat = llm_chat.with_instructions(instructions)
 

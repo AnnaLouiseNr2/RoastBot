@@ -2,7 +2,7 @@
 
 <div class="container py-4 people-show">
   <div class="mb-3">
-    <%= link_to "← Back to People", people_path, class: "text-decoration-none" %>
+    <%= link_to "← Back to Roastees", people_path, class: "text-decoration-none" %>
   </div>
 
   <div class="card shadow-sm border-0 overflow-hidden">
@@ -22,7 +22,7 @@
 
         <div class="d-none d-md-flex gap-2">
           <%# If chats are set up %>
-          <%= link_to "Start New Chat", new_person_chat_path(@person), class: "btn btn-primary" rescue nil %>
+          <%= link_to "Start New Chat", new_person_chat_path(@person), class: "btn btn-warning" rescue nil %>
         </div>
       </div>
 
@@ -41,7 +41,7 @@
             <h2 class="h5 mb-0">Chats</h2>
             <%# Mobile button %>
             <div class="d-md-none">
-              <%= link_to "Start Chat", new_person_chat_path(@person), class: "btn btn-sm btn-primary" rescue nil %>
+              <%= link_to "Start Chat", new_person_chat_path(@person), class: "btn btn-sm btn-warning" rescue nil %>
             </div>
           </div>
 
@@ -69,7 +69,7 @@
 
 <%= button_to "Delete Person", person_path(@person),
           method: :delete,
-          data: { turbo_confirm: "Are you sure you want to delete this person?" }, class: "btn btn-outline-secondary" %>
+          data: { turbo_confirm: "Are you sure you want to delete this person?" }, class: "btn btn-warning" %>
 
     </div>
   </div>
