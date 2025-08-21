@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_person, only: %i[index new create]
+  before_action :set_person, only: %i[index new create show]
 
   def index
     @chats = current_user.chats.order(updated_at: :desc)
@@ -20,10 +20,10 @@ class ChatsController < ApplicationController
   def create
     @chat = (@person ? @person.chats.build(chat_params) : Chat.new(chat_params))
     @chat.user ||= current_user
-    @chat.name ||= 'Untitled'
+
 
     if @chat.save
-      redirect_to chat_path(@chat)
+      redirect_to person_path(@person)
     else
       render :new, status: :unprocessable_entity
     end

@@ -6,14 +6,21 @@ class MessagesController < ApplicationController
   SYSTEM_PROMPT = <<~PROMPT.freeze
     You are RoastBot — a witty but not abusive friendly roast assistant. Keep humour playful, avoid hateful or abusive content,
     and never reveal private user data. When asked about a specific person, respond with a short roast under 200 characters.
+    DO NOT RETURN ANYTHING ELSE NOT RELATED WITH ROASTING.
+
+ Rules:
+: Focus: careers, quirks, fashion, rivals, memes, brand image, public gaffes.
+If little info → default to generic roast of their vibe/archetype.
   PROMPT
 
   def new
     @message = @chat.messages.new
+
   end
 
   def create
     @message = @chat.messages.build(message_params.merge(role: 'user'))
+    @person = Person.find(params[:person_id])
     if @message.save
       handle_llm_reply(@message)
       redirect_to chat_path(@chat)
@@ -39,18 +46,14 @@ class MessagesController < ApplicationController
   def handle_llm_reply(user_message)
     return unless defined?(RubyLLM)
 
-    instructions = [SYSTEM_PROMPT, (@chat.challenge&.system_prompt)].compact.join("\n\n")
+    instructions = [SYSTEM_PROMPT, "Please return the roast created in this tone: #{@chat.tone}, and create the
+       roast fromat in this format: #{@chat.format}. The person you want to roast is named: #{@person.name}, with their fun facts: #{@person.fun_facts}"].compact.join("\n\n")
     llm_chat = RubyLLM.chat
-    llm_chat = llm_chat.with_instructions(instructions) if instructions.present?
+    llm_chat = llm_chat.with_instructions(instructions)
 
-    begin
-      # ask will append user and assistant messages on the RubyLLM side and returns a RubyLLM::Message
       response = llm_chat.ask(user_message.content)
-      assistant_text = response&.content || "Sorry, I couldn't generate a reply."
-    rescue StandardError => e
-      Rails.logger.error("RubyLLM ask failed: \#{e.message}\n\\#{e.backtrace.join("\n")}")
-      assistant_text = "Sorry — AI generation failed (#{e.class}): #{e.message}"
-    end
+      assistant_text = response.content || "Sorry, I couldn't generate a reply."
+
 
     # persist assistant reply (defensive)
     begin
