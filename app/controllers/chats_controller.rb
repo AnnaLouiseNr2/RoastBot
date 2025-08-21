@@ -23,7 +23,7 @@ class ChatsController < ApplicationController
 
 
     if @chat.save
-      redirect_to person_path(@person)
+      redirect_to person_chat_path(@person, @chat)
     else
       render :new, status: :unprocessable_entity
     end
