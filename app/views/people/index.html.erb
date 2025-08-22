@@ -2,36 +2,45 @@
   <div class="hero-text p-4 rounded-3 shadow-lg">
     <h1 class="display-3 fw-bold">Serving Roasts Hotter Than Their PR Spin</h1>
     <p class="lead mt-3">Ready for some sharp wit? Check out the dedicated pages of public figures by clicking on their cards below. 👇</p>
-    <%= simple_form_for @person do |f| %>
-  <%= f.input :name %>
-  <%= f.input :fun_facts, as: :text %>
-  <%= f.input :image, as: :text, label: "Add Image URL (Optional)", input_html: { placeholder: "Give an image url (Optional)", style: "height: 30px;" }%>
-<%= f.button :submit, "Create Roastee!", class: "btn btn-warning" %>
- <% end %>
+    <div class="bg-dark bg-opacity-50 p-4 rounded-3 mt-4">
+      <%= simple_form_for @person do |f| %>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <%= f.input :name, label: false, placeholder: "Name", input_html: { class: "form-control", style: "height: 38px;" } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :fun_facts, as: :string, label: false, placeholder: "Fun facts", input_html: { class: "form-control", style: "height: 38px;" } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :image, as: :string, label: false, placeholder: "Image URL (Optional)", input_html: { class: "form-control", style: "height: 38px;" } %>
+          </div>
+        </div>
+        <div class="mt-3">
+          <%= f.button :submit, "Create Roastee!", class: "btn btn-warning fw-bold px-4" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
+
 
 <div class="container my-5" id="roast-grid">
   <h2 class="text-center mb-5 display-5 fw-bold text-dark">Who's on the menu?</h2>
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-
-
-    <% all_figures = @people.map { |p| { name: p.name, image: p.image, path: person_path(p) } } %>
-
-    <% all_figures.each do |figure| %>
+    <% @people.each do |p| %>
       <div class="col">
         <div class="card h-100 border-0">
-          <%= image_tag figure[:image], class: "card-img-top", alt: figure[:name] %>
+          <%= image_tag(p.image.presence || asset_path("default.jpg"),
+                        class: "card-img-top", alt: (p.name.presence || "Roastee")) %>
           <div class="card-body d-flex flex-column text-center">
-            <h5 class="card-title fw-bold"><%= figure[:name] %></h5>
-            <%= link_to "Roast #{figure[:name].split.first}", figure[:path], class: "btn btn-warning mt-auto" %>
+            <h5 class="card-title fw-bold"><%= p.name %></h5>
+            <%= link_to "Roast #{p.name.to_s.split.first}", person_path(p), class: "btn btn-warning mt-auto" %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-
 
 <style>
   .hero-image {
@@ -43,8 +52,6 @@
     align-items: center;
     justify-content: center;
   }
-
-  .
 
   .hero-text {
     background-color: rgba(0, 0, 0, 0.6);
