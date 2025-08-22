@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_person, only: %i[index new create show]
+  before_action :set_person, only: %i[index new create show destroy]
 
   def index
     @chats = current_user.chats.order(updated_at: :desc)
@@ -24,6 +24,9 @@ class ChatsController < ApplicationController
 
     if @chat.save
       redirect_to person_chat_path(@person, @chat)
+      @message = @chat.messages.build(content: "Roast this person!", role: "user")
+      @message.initialize_llm
+
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +35,7 @@ class ChatsController < ApplicationController
   def destroy
     @chat = current_user.chats.find(params[:id])
     @chat.destroy
-    redirect_to chats_path, notice: 'Chat deleted'
+    redirect_to person_path(@chat.person), notice: "Chat deleted", status: :see_other
   end
 
   private

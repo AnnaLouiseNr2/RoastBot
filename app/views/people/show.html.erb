@@ -3,11 +3,33 @@
     <%= link_to "← Back to Roastees", people_path, class: "text-decoration-none" %>
   </div>
 
+<<<<<<< HEAD
   <div class="card p-4 shadow-sm">
     <div class="d-flex align-items-center gap-3 mb-3">
       <% initials = @person.name.to_s.split.map { |w| w[0] }.join.first(2).upcase %>
       <div class="avatar avatar-xl bg-gradient rounded-circle d-inline-flex justify-content-center align-items-center text-white fw-bold">
         <span><%= initials.presence || "?" %></span>
+=======
+  <div class="card shadow-sm border-0 overflow-hidden">
+    <div class="card-body p-4">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <% initials = @person.name.to_s.split.map { |w| w[0] }.join.first(2).upcase %>
+        <div class="avatar avatar-xl bg-gradient rounded-circle d-inline-flex justify-content-center align-items-center text-white fw-bold">
+          <img src=`#{@person.image}` alt="avatar">
+        </div>
+
+        <div class="flex-grow-1">
+          <h1 class="h3 mb-1"><%= @person.name %></h1>
+          <% if @person.updated_at %>
+            <div class="text-muted small">Last updated <%= time_ago_in_words(@person.updated_at) %> ago</div>
+          <% end %>
+        </div>
+
+        <div class="d-none d-md-flex gap-2">
+          <%# If chats are set up %>
+          <%= link_to "Start New Chat", new_person_chat_path(@person), class: "btn btn-warning" rescue nil %>
+        </div>
+>>>>>>> master
       </div>
 
       <div class="flex-grow-1">

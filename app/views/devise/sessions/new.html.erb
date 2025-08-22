@@ -1,21 +1,23 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
   <div class="w-60" style="max-width: 500px;">
-    <h2>Log in</h2>
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "bg-white p-4 rounded shadow-sm" }) do |f| %>
-      <div class="form-inputs">
+    <h2 class="text-center mb-4 display-5 fw-bold text-warning">RoastBot Login</h2>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "bg-dark p-4 rounded-4 shadow-lg border border-secondary" }) do |f| %>
+      <div class="form-inputs text-light">
         <%= f.input :email,
                     required: false,
                     autofocus: true,
-                    input_html: { autocomplete: "email", class: "form-control" } %>
+                    input_html: { autocomplete: "email", class: "form-control bg-secondary text-light border-0" } %>
         <%= f.input :password,
                     required: false,
-                    input_html: { autocomplete: "current-password", class: "form-control" } %>
+                    input_html: { autocomplete: "current-password", class: "form-control bg-secondary text-light border-0" } %>
         <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
       </div>
-      <div class="form-actions mt-3">
-        <%= f.button :submit, "Log in", class: "btn btn-warning w-100" %>
+      <div class="form-actions mt-4">
+        <%= f.button :submit, "Log in", class: "btn btn-warning w-100 fw-bold py-3" %>
       </div>
     <% end %>
-    <%= render "devise/shared/links" %>
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 </div>

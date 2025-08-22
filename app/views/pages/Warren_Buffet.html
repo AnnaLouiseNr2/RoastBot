@@ -1,0 +1,137 @@
+<style>
+    :root{
+      --bg:#f2f2f2;
+      --card:#ffffff;
+      --muted:#eef3f7;
+      --text:#222;
+      --sub:#5a6b7a;
+      --link:#1a73e8;
+      --shadow:0 2px 10px rgba(0,0,0,.06);
+      --radius:12px;
+      --pad:18px;
+      --maxw:860px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+
+    /* Top bar */
+    .navbar{
+      position:sticky; top:0;
+      background:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+      box-shadow:0 1px 0 rgba(0,0,0,.06);
+      z-index:10;
+    }
+    .brand{font-weight:800; letter-spacing:.2px}
+    .hamburger{
+      width:28px; height:18px; display:grid; gap:4px; cursor:pointer;
+    }
+    .hamburger span{
+      display:block; height:2px; background:#333; border-radius:2px;
+    }
+
+    /* Page */
+    .page{max-width:var(--maxw); margin:24px auto; padding:0 16px;}
+    .utility-links{
+      text-align:right; margin-bottom:8px; font-size:14px;
+    }
+    .utility-links a{color:var(--link); margin-left:10px; text-decoration:underline}
+    h1{
+      margin:0 0 18px; font-size:44px; font-weight:800; letter-spacing:.2px;
+      color:#4b5563;
+    }
+
+    /* Cards */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:0;
+      overflow:hidden;
+      border:1px solid #e9edf1;
+    }
+    .card + .card{margin-top:18px}
+    .stamp{
+      background:var(--muted);
+      color:#6b7f92;
+      padding:12px var(--pad);
+      font-size:14px;
+      font-weight:600;
+    }
+    .content{
+      padding:14px var(--pad) 18px;
+    }
+    .divider{
+      height:1px; background:#eef1f4; margin:6px var(--pad);
+    }
+
+    /* Wrapper to mimic the rounded white panel around the feed */
+    .panel{
+      background:#fff;
+      border-radius:14px;
+      padding:22px;
+      border:1px solid #e6eaee;
+      box-shadow:var(--shadow);
+    }
+
+    @media (max-width:520px){
+      h1{font-size:32px}
+      .panel{padding:14px}
+    }
+  </style>
+
+<body>
+
+  <!-- Top navigation -->
+  <header class="navbar">
+    <div class="brand">RoastBot</div>
+    <div class="hamburger" aria-label="menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main class="page">
+
+    <h1>Roast History of Elon</h1>
+
+    <section class="panel">
+      <!-- Card 1 -->
+      <article class="card">
+        <div class="stamp">2025-08-21 15:14:45 UTC</div>
+        <div class="content">Please roast Elon</div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card">
+        <div class="stamp">2025-08-21 15:14:47 UTC</div>
+        <div class="content">
+          Taylor Swift, queen of rewriting her past like a hit song — guess her autobiography should come with a remix button.
+        </div>
+      </article>
+
+      <!-- Card 3 (with divider between prompt & reply style) -->
+      <article class="card">
+        <div class="stamp">2025-08-21 15:15:06 UTC</div>
+        <div class="content">roast</div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="card">
+        <div class="stamp">2025-08-21 15:15:07 UTC</div>
+        <div class="content">
+          The person you want to roast is named: the, with their fun facts: no specific details provided. Well, judging by the vibe, you’re the human equivalent of a dial-up connection—trying to stay relevant but painfully outdated.
+        </div>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>
