@@ -33,7 +33,6 @@ class PeopleController < ApplicationController
   end
   end
 
-
   def destroy
     @person = Person.find(params[:id])
     @person.destroy

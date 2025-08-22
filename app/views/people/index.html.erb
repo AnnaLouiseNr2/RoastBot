@@ -5,8 +5,8 @@
     <%= simple_form_for @person do |f| %>
   <%= f.input :name %>
   <%= f.input :fun_facts, as: :text %>
-  <%= f.input :image, as: :text, label: "Image URL(Optional)", input_html: { placeholder: "Give an image url (Optional)", style: "height: 30px;" }%>
-  <%= f.button :submit, "Create Person", style: "color: white; background-color: green;" %>
+  <%= f.input :image, as: :text, label: "Add Image URL (Optional)", input_html: { placeholder: "Give an image url (Optional)", style: "height: 30px;" }%>
+<%= f.button :submit, "Create Roastee!", class: "btn btn-warning" %>
  <% end %>
   </div>
 </div>
@@ -24,7 +24,7 @@
           <%= image_tag figure[:image], class: "card-img-top", alt: figure[:name] %>
           <div class="card-body d-flex flex-column text-center">
             <h5 class="card-title fw-bold"><%= figure[:name] %></h5>
-            <%= link_to "Roast #{figure[:name].split.first}", figure[:path], class: "btn btn-primary mt-auto" %>
+            <%= link_to "Roast #{figure[:name].split.first}", figure[:path], class: "btn btn-warning mt-auto" %>
           </div>
         </div>
       </div>
