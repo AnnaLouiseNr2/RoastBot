@@ -14,7 +14,7 @@ class ChatsController < ApplicationController
 
   def new
     @chat = (@person ? @person.chats.build : Chat.new)
-    @chat.name ||= 'Untitled'
+    @chat.name ||= 'This will be the title of your roast chat'
   end
 
   def create
