@@ -1,17 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
-  <div class="container">
-    <%= link_to root_path, class: "navbar-brand fs-3 fw-bold text-warning" do %>
-      RoastBot
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <div class="container-fluid">
+    <!-- Brand without Avatar -->
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= content_tag :strong, "RoastBot" %>
     <% end %>
+
+    <!-- Navbar toggler for collapse -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <% if user_signed_in? %>
           <li class="nav-item ms-lg-3">
             <%= link_to "Dashboard", people_path, class: "btn btn-warning fw-bold px-4 shadow-sm" %>
           </li>
+        <% else %>
           <li class="nav-item">
             <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link fw-semibold" %>
           </li>

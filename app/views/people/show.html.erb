@@ -1,6 +1,4 @@
-
-
-<div class="container py-4 people-show">
+<div class="container mt-4 people-show">
   <div class="mb-3">
     <%= link_to "← Back to Roastees", people_path, class: "text-decoration-none" %>
   </div>
@@ -26,51 +24,59 @@
         </div>
       </div>
 
-      <hr class="my-4">
+      <div class="flex-grow-1">
+        <h1 class="h3 mb-1"><%= @person.name %></h1>
+        <% if @person.updated_at %>
+          <div class="text-muted small">Last updated <%= time_ago_in_words(@person.updated_at) %> ago</div>
+        <% end %>
+      </div>
 
-      <div class="row g-4">
-        <div class="col-12 col-lg-7">
-          <h2 class="h5 mb-2">Fun facts</h2>
-          <div class="fun-fact-box p-3 rounded">
-            <%= @person.fun_facts.present? ? simple_format(@person.fun_facts) : content_tag(:span, "No fun facts yet.") %>
-          </div>
-        </div>
-
-        <div class="col-12 col-lg-5">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h2 class="h5 mb-0">Chats</h2>
-            <%# Mobile button %>
-            <div class="d-md-none">
-              <%= link_to "Start Chat", new_person_chat_path(@person), class: "btn btn-sm btn-warning" rescue nil %>
-            </div>
-          </div>
-
-          <% if defined?(@chats) && @chats.any? %>
-            <ul class="list-group chat-list">
-              <% @chats.each do |chat| %>
-                <li class="list-group-item d-flex justify-content-between align-items-center chat-item">
-                  <%= link_to (chat.name.presence || "Chat ##{chat.id}"),
-                              person_chat_path(@person, chat),
-                              class: "stretched-link text-decoration-none fw-medium" %>
-                  <span class="badge bg-light text-muted">
-                    <%= time_ago_in_words(chat.created_at) %> ago
-                  </span>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <div class="text-muted small">No chats yet. Start the first one!</div>
-          <% end %>
-        </div>
+      <div class="d-none d-md-flex gap-2">
+        <%= link_to "Start New Chat", new_person_chat_path(@person), class: "btn btn-warning" rescue nil %>
       </div>
     </div>
 
-    <div class="card-footer bg-white d-flex gap-2">
+    <hr class="my-4">
 
-<%= button_to "Delete Person", person_path(@person),
-          method: :delete,
-          data: { turbo_confirm: "Are you sure you want to delete this person?" }, class: "btn btn-warning" %>
+    <div class="row g-4">
+      <div class="col-12 col-lg-7">
+        <h2 class="h5 mb-2">Fun facts</h2>
+        <div class="card p-3">
+          <%= @person.fun_facts.present? ? simple_format(@person.fun_facts) : content_tag(:span, "No fun facts yet.") %>
+        </div>
+      </div>
 
+      <div class="col-12 col-lg-5">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h2 class="h5 mb-0">Chats</h2>
+          <div class="d-md-none">
+            <%= link_to "Start Chat", new_person_chat_path(@person), class: "btn btn-sm btn-warning" rescue nil %>
+          </div>
+        </div>
+
+        <% if defined?(@chats) && @chats.any? %>
+          <ul class="list-group">
+            <% @chats.each do |chat| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= link_to (chat.name.presence || "Chat ##{chat.id}"),
+                            person_chat_path(@person, chat),
+                            class: "stretched-link text-decoration-none fw-medium" %>
+                <span class="badge bg-light text-muted">
+                  <%= time_ago_in_words(chat.created_at) %> ago
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="text-muted small">No chats yet. Start the first one!</div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mt-4 text-center">
+      <%= button_to "Delete Person", person_path(@person),
+            method: :delete,
+            data: { turbo_confirm: "Are you sure you want to delete this person?" }, class: "btn btn-warning w-100" %>
     </div>
   </div>
 </div>
