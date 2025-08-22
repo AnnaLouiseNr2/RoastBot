@@ -1,10 +1,12 @@
-<h1>New Chat</h1>
+<div class="chat-form-container">
+  <h1>New Chat</h1>
 
-<%= simple_form_for [@person, @chat] do |f| %>
-  <%= f.input :name, label: "Chat room name" %>
-  <%= f.input :tone %>
-  <%= f.input :format %>
-  <%= f.button :submit, "Create Chat" %>
- <% end %>
+  <%= simple_form_for [@person, @chat], html: { class: "chat-form" } do |f| %>
+    <%= f.input :name, label: "Chat room name", input_html: { class: "form-input" } %>
+    <%= f.input :tone, placeholder: "e.g. Sarcastic", input_html: { class: "form-input" } %>
+    <%= f.input :format, placeholder: "e.g. Poem" , input_html: { class: "form-input" } %>
+    <%= f.button :submit, "Create Chat", class: "btn-submit" %>
+  <% end %>
 
-<%= link_to "Back to Person", person_path(@person) %>
+  <%= link_to "Back to Person", person_path(@person), class: "back-link" %>
+</div>
