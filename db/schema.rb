@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_20_095739) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_22_124613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_20_095739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.text "image"
+    t.string "image", default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZrQECMXyRq9IlO7BJY_xHXQ7MMMbarta1oQ&s"
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
