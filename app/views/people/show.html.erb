@@ -10,7 +10,7 @@
       <div class="d-flex align-items-center gap-3 mb-3">
         <% initials = @person.name.to_s.split.map { |w| w[0] }.join.first(2).upcase %>
         <div class="avatar avatar-xl bg-gradient rounded-circle d-inline-flex justify-content-center align-items-center text-white fw-bold">
-          <span><%= initials.presence || "?" %></span>
+          <img src=`#{@person.image}` alt="avatar">
         </div>
 
         <div class="flex-grow-1">
