@@ -1,12 +1,38 @@
-<div class="chat-form-container">
-  <h1>New Chat</h1>
+<div class="container mt-4">
+  <div class="message-header mb-3">
+    <h1>Create a New Chat for <%= @person.name %></h1>
+  </div>
 
-  <%= simple_form_for [@person, @chat], html: { class: "chat-form" } do |f| %>
-    <%= f.input :name, label: "Chat room name", input_html: { class: "form-input" } %>
-    <%= f.input :tone, placeholder: "e.g. Sarcastic", input_html: { class: "form-input" } %>
-    <%= f.input :format, placeholder: "e.g. Poem" , input_html: { class: "form-input" } %>
-    <%= f.button :submit, "Create Chat", class: "btn-submit" %>
-  <% end %>
+  <div class="content">
+    <div class="card p-4 shadow-sm">
+      <%= simple_form_for [@person, @chat], html: { class: "row g-3" } do |f| %>
+        <!-- Title -->
+        <div class="col-12">
+          <label class="form-label fw-bold">Title</label>
+          <%= f.input_field :name, class: "form-control", placeholder: "This will be the title of your roast chat", label: false %>
+        </div>
 
-  <%= link_to "Back to Person", person_path(@person), class: "back-link" %>
+        <!-- Tone -->
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Tone</label>
+          <%= f.input_field :tone, class: "form-control", placeholder: "Funny, Spicy, Medium, etc.", label: false %>
+        </div>
+
+        <!-- Format -->
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Format</label>
+          <%= f.input_field :format, class: "form-control", placeholder: "Text, Poem, Haiku, etc.", label: false %>
+        </div>
+
+        <!-- Submit -->
+        <div class="col-12 mt-3">
+          <%= f.button :submit, "Create Chat", class: "btn btn-warning w-100" %>
+        </div>
+      <% end %>
+
+      <div class="mt-3 text-center">
+        <%= link_to "Back to Roastee", person_path(@person), class: "btn btn-dark" %>
+      </div>
+    </div>
+  </div>
 </div>
